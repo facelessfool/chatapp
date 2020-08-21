@@ -15,13 +15,18 @@ app.use(express.static("public"));
 
 //Socket
 var io = socket(server);
-io.on("connection", (socket_instance) => {
+io.on("connection", (socket) => {
   //   console.log("socket instance: ", socket_instance);
-  console.log("connection fired from socket!", socket_instance.id);
+  console.log("connection fired from socket!", socket.id);
   //socket refers to the particular socket between the server and the client
-  socket_instance.on("chat", (data) => {
+  socket.on("chat", (data) => {
     //broadcast the msg to all the sockets connected to the server
     console.log("data", data);
     io.sockets.emit("chat", data);
+  });
+
+  socket.on("typing", (data) => {
+    console.log("FROM INDEX JS : ", data);
+    socket.broadcast.emit("typing", data);
   });
 });
