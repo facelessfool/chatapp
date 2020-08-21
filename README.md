@@ -1,2 +1,2 @@
 # chatapp
-real time chat app with Node.js, Express and socket.io
+real time chat app with Node.js, Express.js and socket.io
