@@ -1,3 +1,29 @@
 body {
-  background-color: aquamarine;
+  background-color: white;
+}
+
+#container {
+  /* padding-top: 30%; */
+  width: 40%;
+  height: 350px;
+  margin-left: 20%;
+
+  background-color: #76cf8d;
+}
+#uid {
+  background-color: #a5c8f2;
+  width: 25%;
+  margin-top: 328px;
+}
+#msg {
+  /* float: left; */
+  /* margin-top: 400px; */
+  background-color: #bbcff0;
+  padding-top: 15px;
+  width: 97%;
+  padding-bottom: 20%;
+}
+#send {
+  float: left;
+  margin-left: 82%;
 }
