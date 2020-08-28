@@ -10,6 +10,13 @@ var server = app.listen(4000, () => {
 });
 
 // //Static files
+//to send a msg
+
+io.on('connect', socket => {
+  socket.on('hey', data => {
+    console.log('hey', data);
+  });
+});
 
 app.use(express.static("public"));
 
