@@ -11,7 +11,12 @@ var server = app.listen(4000, () => {
 
 // //Static files
 //to send a msg
-
+const httpServer = require('http').createServer((req, res) => {
+  // serve the index.html file
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Content-Length', Buffer.byteLength(content));
+  res.end(content);
+});
 io.on('connect', socket => {
   socket.on('hey', data => {
     console.log('hey', data);
