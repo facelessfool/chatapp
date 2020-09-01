@@ -59,4 +59,13 @@ io.on("connection", (socket) => {
     console.log("FROM INDEX JS : ", data);
     socket.broadcast.emit("typing", data);
   });
+  
+   socket.on('username', function(username) {
+        socket.username = username;
+        io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
+    });
+
+    socket.on('disconnect', function(username) {
+        io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
+    })
 });
