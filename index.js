@@ -10,36 +10,6 @@ var server = app.listen(4000, () => {
 });
 
 // //Static files
-//to send a msg
-const httpServer = require('http').createServer((req, res) => {
-  // serve the index.html file
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Content-Length', Buffer.byteLength(content));
-  res.end(content);
-});
-io.on('connect', socket => {
-  socket.on('hey', data => {
-    console.log('hey', data);
-  });
-});
-
-
-const socket = io('ws://localhost:3000');
-
-socket.on('connect', () => {
-  // either with send()
-  socket.send('Hello!');
-
-  // or with emit() and custom event names
-  socket.emit('salutations', 'Hello!', { 'mr': 'john' }, Uint8Array.from([1, 2, 3, 4]));
-});
-
-// handle the event sent with socket.send()
-socket.on('message', data => {
-  console.log(data);
-});
-
-
 
 app.use(express.static("public"));
 
@@ -59,13 +29,4 @@ io.on("connection", (socket) => {
     console.log("FROM INDEX JS : ", data);
     socket.broadcast.emit("typing", data);
   });
-  
-   socket.on('username', function(username) {
-        socket.username = username;
-        io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
-    });
-
-    socket.on('disconnect', function(username) {
-        io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
-    })
 });
