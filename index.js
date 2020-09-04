@@ -1,32 +1,14 @@
 var express = require("express");
-var socket = require("socket.io");
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const socketio = require("socket.io");
+const io = socketio(server);
 
-// console.log("inside socket.io : ", socket);
-//set up App
-var app = express();
+const PORT = 3000 || process.env.PORT;
 
-var server = app.listen(4000, () => {
-  console.log("listening on 4000.");
-});
+server.listen(PORT, () => console.log(`server running at ${PORT}`));
 
-// //Static files
-
+//to serve static files such as images, CSS files and js files.
+//express.static built in middleware function in express
 app.use(express.static("public"));
-
-//Socket
-var io = socket(server);
-io.on("connection", (socket) => {
-  //   console.log("socket instance: ", socket_instance);
-  console.log("connection fired from socket!", socket.id);
-  //socket refers to the particular socket between the server and the client
-  socket.on("chat", (data) => {
-    //broadcast the msg to all the sockets connected to the server
-    console.log("data", data);
-    io.sockets.emit("chat", data);
-  });
-
-  socket.on("typing", (data) => {
-    console.log("FROM INDEX JS : ", data);
-    socket.broadcast.emit("typing", data);
-  });
-});
